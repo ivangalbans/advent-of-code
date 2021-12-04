@@ -1,7 +1,7 @@
 (ns advent-of-code.2021.day2
   (:require [clojure.string :as str]))
 
-(def input (->> (slurp "./resources/2021/input2.txt")
+(def input (->> (slurp "./resources/2021/day2.txt")
                 str/split-lines
                 (map #(str/split % #" "))))
 

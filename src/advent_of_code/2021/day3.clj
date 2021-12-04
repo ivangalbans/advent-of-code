@@ -16,7 +16,7 @@
 00010
 01010")
 
-(def input (slurp "./resources/2021/input3.txt"))
+(def input (slurp "./resources/2021/day3.txt"))
 
 (defn part1
   ([] (part1 input))
@@ -53,9 +53,10 @@
    (let [lines (str/split-lines input)
          O2    (rating lines \1 \0)
          CO2   (rating lines \0 \1)]
-     O2)))
+     (* O2 CO2))))
 
 (comment
   (part1 example)
   (part1)
-  (part2 example))
+  (part2 example)
+  (part2))
