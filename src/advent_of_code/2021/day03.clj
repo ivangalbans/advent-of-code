@@ -1,4 +1,4 @@
-(ns advent-of-code.2021.day3
+(ns advent-of-code.2021.day03
   (:require [clojure.string :as str]
             [clojure.java.math :as math]))
 
@@ -16,7 +16,7 @@
 00010
 01010")
 
-(def input (slurp "./resources/2021/day3.txt"))
+(def input (slurp "./resources/2021/day03.txt"))
 
 (defn part1
   ([] (part1 input))

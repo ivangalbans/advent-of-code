@@ -1,4 +1,4 @@
-(ns advent-of-code.2021.day4
+(ns advent-of-code.2021.day04
   (:require [clojure.string :as str]))
 
 (def example
@@ -22,7 +22,7 @@
 22 11 13  6  5
  2  0 12  3  7")
 
-(def input (slurp "./resources/2021/day4.txt"))
+(def input (slurp "./resources/2021/day04.txt"))
 
 (defn parse-board [board]
   (-> board

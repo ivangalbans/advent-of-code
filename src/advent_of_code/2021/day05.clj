@@ -1,4 +1,4 @@
-(ns advent-of-code.2021.day5
+(ns advent-of-code.2021.day05
   (:require [clojure.string :as str]
             [clojure.java.math :as math]))
 
@@ -14,7 +14,7 @@
 0,0 -> 8,8
 5,5 -> 8,2")
 
-(def input (slurp "./resources/2021/day5.txt"))
+(def input (slurp "./resources/2021/day05.txt"))
 
 (defn parse-point [[x y]]
   [(parse-long x) (parse-long y)])

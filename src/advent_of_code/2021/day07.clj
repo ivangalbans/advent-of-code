@@ -1,11 +1,11 @@
-(ns advent-of-code.2021.day7
+(ns advent-of-code.2021.day07
   (:require
    [clojure.string :as str]
    [clojure.java.math :as math]))
 
 (def sample "16,1,2,0,4,2,7,1,2,14")
 
-(def input (slurp "./resources/2021/day7.txt"))
+(def input (slurp "./resources/2021/day07.txt"))
 
 (defn parse [input]
   (as-> input $

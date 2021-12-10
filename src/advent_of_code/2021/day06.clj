@@ -1,9 +1,9 @@
-(ns advent-of-code.2021.day6
+(ns advent-of-code.2021.day06
   (:require [clojure.string :as str]))
 
 (def sample "3,4,3,1,2")
 
-(def input (slurp "./resources/2021/day6.txt"))
+(def input (slurp "./resources/2021/day06.txt"))
 
 (defn reproduce [fishes]
   (reduce-kv
