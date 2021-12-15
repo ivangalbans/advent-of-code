@@ -1,6 +1,6 @@
 (ns advent-of-code.2021.day14
   (:require [clojure.string :as str]
-            [advent-of-code.common.core :refer [window]]))
+            [advent-of-code.common.core :refer [window read-input]]))
 
 (def sample
   "NNCB
@@ -22,7 +22,7 @@ BC -> B
 CC -> N
 CN -> C")
 
-(def input (slurp "./resources/2021/day14.txt"))
+(def input (read-input 2021 14))
 
 (defn parse [input]
   (let [[polymer rules] (str/split input #"\n\n")]

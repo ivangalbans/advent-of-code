@@ -4,6 +4,9 @@
 
 (def oo 99999999)
 
+(defn read-input [year day]
+  (slurp (str "./resources/" year "/day" day ".txt")))
+
 (defn window [coll]
   (map (fn [x y] [x y]) coll (rest coll)))
 
