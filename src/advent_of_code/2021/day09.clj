@@ -1,5 +1,6 @@
 (ns advent-of-code.2021.day09
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [advent-of-code.common.core :refer [index-at neighbors4 hvneighbors4-pos))
 
 (def sample
   "2199943210
@@ -15,42 +16,22 @@
        (str/split-lines)
        (map (fn [line] (map #(- (int %) (int \0)) line)))))
 
-(parse sample)
-
-(defn index [board i j]
-  (nth (nth board i) j))
-
 (defn lowest? [x coll]
   (->> coll
        (map (partial < x))
        (every? true?)))
 
-(defn inside? [n m [i j]]
-  (and (>= i 0) (< i n)
-       (>= j 0) (< j m)))
-
-(defn neighbors-pos [board i j]
-  (let [n (-> board count)
-        m (-> board first count)]
-    (->> [[0 -1] [1 0] [0 1] [-1 0]]
-         (map (fn [[x y]] [(+ i x) (+ j y)]))
-         (filter (partial inside? n m)))))
-
-(defn neighbors [board i j]
-  (->> (neighbors-pos board i j)
-       (map (fn [[x y]] (index board x y)))))
-
 (defn lowest-pos [board]
   (for [i (range (count board))
         j (range (-> board first count))
-        :let [item (index board i j)
-              adjs (neighbors board i j)]
+        :let [item (index-at board i j)
+              adjs (neighbors4 board i j)]
         :when (lowest? item adjs)]
     [i j]))
 
 (defn lowest [board]
   (->> (lowest-pos board)
-       (map (fn [[x y]] (index board x y)))))
+       (map #(index-at board %))))
 
 (defn part1
   ([] (part1 sample))
@@ -64,9 +45,9 @@
   (loop [queue   [initial]
          visited #{}]
     (let [[x y] (peek queue)
-          adjs  (->> (neighbors-pos board x y)
+          adjs  (->> (neighbors4-pos board x y)
                      (filter (comp not visited))
-                     (filter (fn [[x' y']] (not= 9 (index board x' y')))))]
+                     (filter #(not= 9 (index-at board %))))]
       (if (empty? queue)
         visited
         (recur (apply conj (pop queue) adjs) (conj visited [x y]))))))

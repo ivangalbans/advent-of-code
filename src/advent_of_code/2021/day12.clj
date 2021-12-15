@@ -1,5 +1,6 @@
 (ns advent-of-code.2021.day12
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [advent-of-code.common.core :refer [lower-case? oo]]))
 
 (def sample1
   "start-A
@@ -33,9 +34,6 @@ kj-dc")
                      (update dst (fnil conj []) src)))
                {})))
 
-(defn lower-case? [s]
-  (= s (str/lower-case s)))
-
 (defn dfs [graph start end visited]
   (cond
     (= start end) 1
@@ -45,8 +43,6 @@ kj-dc")
            (map (fn [node]
                   (dfs graph node end (update visited start dec)))
                 (get graph start)))))
-
-(def oo 99999999)
 
 (defn ends? [node]
   (#{"start" "end"} node))

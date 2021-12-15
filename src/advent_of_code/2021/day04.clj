@@ -1,5 +1,6 @@
 (ns advent-of-code.2021.day04
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [advent-of-code.common.core :refer [transpose]]))
 
 (def example
   "7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1
@@ -49,9 +50,6 @@
            (remove num-set)
            (reduce +)
            (* (last nums))))))
-
-(defn transpose [board]
-  (apply map vector board))
 
 (defn winner? [board nums]
   (or (win-rows? board nums)

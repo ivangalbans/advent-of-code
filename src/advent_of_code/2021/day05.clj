@@ -1,6 +1,7 @@
 (ns advent-of-code.2021.day05
   (:require [clojure.string :as str]
-            [clojure.java.math :as math]))
+            [clojure.java.math :as math]
+            [advent-of-code.common.core :refer [sign]]))
 
 (def sample
   "0,9 -> 5,9
@@ -32,11 +33,6 @@
 
 (defn diagonal? [[[x1 y1] [x2 y2]]]
   (= (math/abs (- x1 x2)) (math/abs (- y1 y2))))
-
-(defn sign [x]
-  (if (zero? x)
-    0
-    (/ x (math/abs x))))
 
 (defn expand-line [[[x1 y1] [x2 y2]]]
   (if (diagonal? [[x1 y1] [x2 y2]])
