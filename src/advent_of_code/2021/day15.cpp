@@ -10,11 +10,10 @@ typedef pair<int, int> ii;
 const int oo = (1 << 30);
 const int MaxN = 250000 + 5;
 int n;
-vector<ii> g[MaxN];
 
 priority_queue<ii, vector<ii>, greater<ii>> pq;
 
-vector<int> Dijkstra(int s) {
+vector<int> Dijkstra(vector<ii> g[], int s) {
   vector<int> d(n, oo);
   pq = priority_queue<ii, vector<ii>, greater<ii>>();
 
@@ -61,6 +60,7 @@ int one(int x, int y, int row) { return x * row + y; }
 
 int solve(vector<vector<int>> grid, int row, int col) {
   n = row * col;
+  vector<ii> g[n];
 
   for (int i = 0; i < row; ++i)
     for (int j = 0; j < col; ++j)
@@ -68,13 +68,13 @@ int solve(vector<vector<int>> grid, int row, int col) {
         g[one(i, j, row)].push_back(
             ii(grid[adj.F][adj.S], one(adj.F, adj.S, row)));
 
-  vector<int> d = Dijkstra(0);
+  vector<int> d = Dijkstra(g, 0);
 
   return d[one(row - 1, col - 1, row)];
 }
 
 int main() {
-  ifstream infile("../../../resources/2021/day15-sample.txt");
+  ifstream infile("../../../resources/2021/day15.txt");
 
   vector<vector<int>> grid;
   string line;
@@ -95,15 +95,17 @@ int main() {
   vector<vector<int>> grid5(row5, vector<int>(col5));
 
   for (int i = 0; i < row5; ++i)
-    for (int j = 0; j < col5; ++j)
+    for (int j = 0; j < col5; ++j) {
       if (i < row && j < col)
         grid5[i][j] = grid[i][j];
-      else if (i >= row && j >= row)
-        grid5[i][j] = (grid5[i - row][j - col] + 1) % 10;
       else if (i >= row)
-        grid5[i][j] = (grid5[i - row][j] + 1) % 10;
+        grid5[i][j] = grid5[i - row][j] + 1;
       else
-        grid5[i][j] = (grid5[i][j - col] + 1) % 10;
+        grid5[i][j] = grid5[i][j - col] + 1;
+
+      if (grid5[i][j] == 10)
+        grid5[i][j] = 1;
+    }
 
   cout << "part2: " << solve(grid5, row5, col5) << endl;
 
