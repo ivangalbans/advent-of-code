@@ -62,10 +62,10 @@
 
 (defn parse-operation [bits]
   (let [[length-type-id bits] (parse-bits 1 bits)
-        [packets-parser len] (case length-type-id
-                               0 [parse-len-packets 15]
-                               1 [parse-count-packets 11])
-        [n bits] (parse-bits len bits)]
+        [packets-parser n] (case length-type-id
+                             0 [parse-len-packets 15]
+                             1 [parse-count-packets 11])
+        [n bits] (parse-bits n bits)]
     (packets-parser n bits)))
 
 (defn parse-literal [bits]
