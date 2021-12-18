@@ -50,3 +50,8 @@
 
 (defn lower-case? [s]
   (= s (str/lower-case s)))
+
+(defn print-grid [grid]
+  (->> (map str/join grid)
+       (str/join \newline)
+       (println)))
