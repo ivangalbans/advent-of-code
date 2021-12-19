@@ -1,5 +1,6 @@
 (ns advent-of-code.2021.day08
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [clojure.math.combinatorics :as comb]))
 
 (def sample
   "be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
@@ -59,23 +60,6 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
    [0 1 2 3 4 5 6] 8
    [0 1 2 3 5 6]   9})
 
-(def permutations
-  (for [a (range 0 7)
-        b (range 0 7)
-        :when (not (#{a} b))
-        c (range 0 7)
-        :when (not (#{a b} c))
-        d (range 0 7)
-        :when (not (#{a b c} d))
-        e (range 0 7)
-        :when (not (#{a b c d} e))
-        f (range 0 7)
-        :when (not (#{a b c d e} f))
-        g (range 0 7)
-        :when (not (#{a b c d e f} g))
-        :let [permutation [a b c d e f g]]]
-    permutation))
-
 (defn parse2 [input]
   (->> input
        str/split-lines
@@ -94,7 +78,7 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
       code)))
 
 (defn solve [[signal output]]
-  (let [code (->> permutations
+  (let [code (->> (comb/permutations (range 0 7))
                   (keep #(solution? % signal))
                   first)]
     (map #(numbers (decode % code)) output)))
