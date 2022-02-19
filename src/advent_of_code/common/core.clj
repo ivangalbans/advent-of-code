@@ -14,9 +14,10 @@
   (apply map vector board))
 
 (defn sign [x]
-  (if (zero? x)
-    0
-    (/ x (math/abs x))))
+  (cond
+    (zero? x) 0
+    (pos? x)  1
+    :else     -1))
 
 (defn index-at
   ([grid [i j]] (index-at grid i j))
